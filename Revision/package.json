@@ -12,6 +12,7 @@
   "type": "commonjs",
   "dependencies": {
     "cat-me": "^1.0.3",
+    "ejs": "^3.1.10",
     "express": "^5.1.0"
   }
 }

@@ -21,8 +21,20 @@
 const express = require('express');
 const app = express();
 
+app.set("view engine",'ejs');
+
+app.use((req,res,next) =>{
+    console.log("This is Middleware");  //browser response nhi de payega until hum next() call return nhi krenge
+    //res.send("Haa bhai ye browser me dikhega");
+
+    const a = 10;
+    const b = 20;
+    console.log(a+b);
+      next(); // pass control to the next middleware/route
+})
+
 app.get('/',(req,res) =>{
-    res.send("Hello Guyzz");
+    res.render('index');
 })
 app.get('/about',(req,res) =>{
     res.send("This is About Route");
