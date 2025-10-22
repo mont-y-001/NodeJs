@@ -1,0 +1,40 @@
+Node is run time environment
+Node js is a js that sends to wrapper that is also used js then it convert in c++ to server v8 Engine
+Node js => js Cover of v8 engine that is written in c++ => c++(sever)
+
+
+//About NPM
+Node js core main jo installed aata hai wo hote h modules and
+npm se download krte h vo hote hai package
+
+//About NodeModule folder
+jb hum koi package one-liner-joke or Accesssibility(text to speech) ya aur koi package install krte h aur agr unn dependencies bhi kisi aur dependencies pr depend krti h too vo files node module me chli jaati hai
+
+#Dependency=>A library or tool that provides specific functionality (e.g., Express for web servers, Mongoose for MongoDB).
+#DevDependency =>Needed only during development (e.g., testing, linting)
+
+//Their are 2 script: Start and Test
+
+
+#Express js = express js ek npm package h and it's a framework
+-express js manages everything from recieving the request and giving the response
+
+*framework(flow) => framework is flow of doing something or we can say that we have to foloow to steps in framework
+*library => library me hume components ya elements mil jaaate h but hum unko apne according use krte hai na ki kisi flow or steps follow krke
+*raect is library coz in that we have components and we can us eaccording to us
+
+
+#Middleware => it is middle man between request and routes
+->our laptop(we request for facebook from server) -> Middleware(we can give anything at this time) -> routes -> response -> faeboob will gives us on our laptop
+
+//imp
+*next(new Error(...)) =>	Tells Express to skip normal route and handle error
+*res.send("...")	 => Sends a normal page response to the user
+
+
+*nodemon server.js is relacable by node --watch server.js
+
+
+#Session Cookoies => hum log kuch bji data frontend par browser par rakh sakte hai and jab bhi aap kuch bhi request backend par karoge wo frontend par save data automatically backend par chala jayega
+
+ex- hum insta pr koi activity krenge server humse puchega app kon means login krne ke liye bolega ,now we have to login to do some activity if i wants to do again i server again ask me to login "so in this case cookies are saved on our broweser that have some code or string which also server have so we can do anything without login or signup"

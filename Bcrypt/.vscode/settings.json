@@ -1,0 +1,10 @@
+{
+    "code-runner.executorMap": {
+      "python": "python",
+      "javascript": "node",
+      "cpp": "g++ $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+      "java": "cd $dir && javac $fileName && java $fileNameWithoutExt"
+    },
+    "code-runner.runInTerminal": true
+  }
+  

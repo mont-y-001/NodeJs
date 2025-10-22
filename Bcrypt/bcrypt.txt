@@ -1,0 +1,17 @@
+#user ko profilr dene se phele ye check krna hota h ke user hai kaun => Authentication
+
+#Authorized to perform some task which are only allowed to be executed by the admin
+
+#Server har baar bhul jata ki aap kon ho,isliye vo har baar tumse identity means login krne ke liye bolega if we want to do any activity =>Cookies and session resolve this problem
+
+#when we send any request server ask for login and we login then server give sus a bdi si string jo ki ki hamare browser me save ho jayegi and then if we ask for login again vo bdi si string chipak kr jayegi hamri request ke saath
+
+1)Cookies kaise set karte hai
+2)bcrypt kaise use karte hai for password encryption and decryption
+3)Jwt kya hai and jwt mein data kaise store krte hai and bahar kaise nikalein
+
+
+#Term	    Meaning
+Salt	=> Random data added to password to make hashes unique
+Hash	=> One-way function to convert data into fixed, unreadable form
+bcrypt	=> Hashing algorithm that auto-generates salt, is slow, secure
