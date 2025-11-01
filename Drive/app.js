@@ -1,12 +1,17 @@
 const express = require('express');
 const app = express();
-
-const connectToDB = require('./config/db');
-
+const UserRouter = require('./routes/user.routes');
 
 const dotenv = require('dotenv');
 dotenv.config();       //iss methos ko call krne se .env file me Mongouri ko puree application ka access mil jaata h
+const connectToDB = require('./config/db');
 connectToDB();   // ✅ Connect to MongoDB after dotenv is loaded
+const indexRouter = require('./routes/index.routes')
+
+const cookieParser  = require('cookie-parser');
+
+
+
 
 //##Koi kaam ka nhi hai kyunki hum routes alag se create krenge routes folder me
 // app.get('/',(req,res) =>{
@@ -14,12 +19,13 @@ connectToDB();   // ✅ Connect to MongoDB after dotenv is loaded
 // })
 
 app.set('view engine','ejs');
+app.use(cookieParser())  //middleware
 
 //Agr ye middleware use nhi krega too terminal me undefined show hoga instead object of data 
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
-const UserRouter = require('./routes/user.routes');
 
+app.use('/',indexRouter);
 app.use('/user',UserRouter);
 
 
