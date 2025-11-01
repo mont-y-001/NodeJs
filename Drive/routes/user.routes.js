@@ -2,8 +2,12 @@ const express = require('express');
 const router = express.Router();
 const { body, validationResult } = require('express-validator');
 const userModel = require('../models/user.model')
+const File = require('../Models/file.model');
+const authMiddleware = require('../Middleware/auth');
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+const multer = require("multer");
+const { supabase } = require("../supabaseClient");
 
 router.get('/register', (req, res) => {
     res.render("register");
@@ -89,5 +93,53 @@ router.post('/Login',
         res.send('Logged in')
     }
 )
+
+
+
+// Set up Multer to handle file uploads in memory
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
+
+// POST route for uploading files
+router.post("/upload", authMiddleware, upload.single("file"), async (req, res) => {
+  try {
+    const file = req.file;
+
+    if (!file) {
+      return res.status(400).json({ message: "No file uploaded" });
+    }
+
+    // Upload file to Supabase storage
+    const { data, error } = await supabase.storage
+      .from("Mohit-Drive") // <-- your Supabase bucket name
+      .upload(`uploads/${Date.now()}_${file.originalname}`, file.buffer, {
+        contentType: file.mimetype,
+      });
+
+    if (error) throw error;
+
+    // Get a public URL for the file
+    const { data: publicData } = supabase.storage
+      .from("Mohit-Drive")
+      .getPublicUrl(data.path);
+
+      // Save file metadata to MongoDB
+    await File.create({
+      user: req.user.userId,        // from JWT
+      fileName: file.originalname,
+      fileUrl: publicData.publicUrl,
+      fileType: file.mimetype,
+      fileSize: file.size,
+    });
+
+    res.json({
+      message: "File uploaded successfully",
+      fileURL: publicData.publicUrl,
+    });
+  } catch (err) {
+    console.error("Upload error:", err.message);
+    res.status(500).json({ message: "File upload failed", error: err.message });
+  }
+});
 
 module.exports = router;
